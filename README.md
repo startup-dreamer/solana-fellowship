@@ -1,6 +1,9 @@
 ## SOL-CLI
 ### A demo wallet cli tool for solana utilities.
 
+> [!CAUTION]
+> This tool is for demo purposes only. Use at your own risk (for solana devnet).
+
 #### How to install
 
 ```bash
