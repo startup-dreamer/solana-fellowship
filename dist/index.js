@@ -24,13 +24,7 @@ program
     .option("-o, --output <filename>", "output file name", "keypair.json")
     .action((options) => __awaiter(void 0, void 0, void 0, function* () {
     const keypair = (0, utilites_1.keyPairGenerator)();
-    try {
-        yield fs_1.promises.writeFile(options.output, keypair);
-        console.log(`Keypair saved to ${options.output}`);
-    }
-    catch (err) {
-        console.error("Error writing file:", err);
-    }
+    yield handleFileWrite(options.output, keypair);
 }));
 program
     .command("airdrop")
@@ -40,12 +34,7 @@ program
     .option("-a, --amount <amount>", "Amount of SOL to airdrop", "1")
     .action((options) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (options.file && options.publicKey) {
-            throw new Error("Please provide either a file or a public key, not both.");
-        }
-        if (!options.file && !options.publicKey) {
-            throw new Error("Please provide either a file or a public key.");
-        }
+        validateOptions(options);
         yield (0, utilites_1.airdropPublicKey)(options);
     }
     catch (error) {
@@ -59,23 +48,11 @@ program
     .option("-p, --publicKey <publicKey>", "Public key to check balance for")
     .action((options) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (options.file && options.publicKey) {
-            throw new Error("Please provide either a file or a public key, not both.");
-        }
-        if (!options.file && !options.publicKey) {
-            throw new Error("Please provide either a file or a public key.");
-        }
-        if (options.file) {
-            const fileContent = yield fs_1.promises.readFile(options.file, "utf-8");
-            const keypairJson = JSON.parse(fileContent);
-            if (!keypairJson.publicKey) {
-                throw new Error("Invalid JSON file format. Public key not found.");
-            }
-            (0, utilites_1.getBalance)(keypairJson.publicKey);
-        }
-        else {
-            (0, utilites_1.getBalance)(options.publicKey);
-        }
+        validateOptions(options);
+        const publicKey = options.file
+            ? yield getPublicKeyFromFile(options.file)
+            : options.publicKey;
+        yield (0, utilites_1.getBalance)(publicKey);
     }
     catch (err) {
         console.error("Error:", err);
@@ -99,3 +76,28 @@ program
     }
 }));
 program.parse(process.argv);
+const handleFileWrite = (filename, content) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield fs_1.promises.writeFile(filename, content);
+        console.log(`File saved to ${filename}`);
+    }
+    catch (err) {
+        console.error("Error writing file:", err);
+    }
+});
+const validateOptions = (options) => {
+    if (options.file && options.publicKey) {
+        throw new Error("Please provide either a file or a public key, not both.");
+    }
+    if (!options.file && !options.publicKey) {
+        throw new Error("Please provide either a file or a public key.");
+    }
+};
+const getPublicKeyFromFile = (filename) => __awaiter(void 0, void 0, void 0, function* () {
+    const fileContent = yield fs_1.promises.readFile(filename, "utf-8");
+    const keypairJson = JSON.parse(fileContent);
+    if (!keypairJson.publicKey) {
+        throw new Error("Invalid JSON file format. Public key not found.");
+    }
+    return keypairJson.publicKey;
+});
