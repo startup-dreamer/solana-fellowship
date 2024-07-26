@@ -8,6 +8,8 @@ import {
 } from "@solana/web3.js";
 import fs from "fs";
 
+const CONNECTION = new Connection("https://api.devnet.solana.com");
+
 export function keyPairGenerator() {
   const keypair = new Keypair();
   const secret = keypair.secretKey;
@@ -37,13 +39,11 @@ export async function airdropPublicKey(options: { file?: string; publicKey?: str
     } else {
       publicKey = new PublicKey(options.publicKey!);
     }
-    const connection = new Connection("https://api.devnet.solana.com");
-
     const amountLamports = options.amount * 1e9;
 
     console.log(`Requesting airdrop of ${options.amount} SOL to ${publicKey.toBase58()}...`);
 
-    const txhash = await connection.requestAirdrop(publicKey, amountLamports);
+    const txhash = await CONNECTION.requestAirdrop(publicKey, amountLamports);
 
     console.log(`Airdrop successful. Transaction hash: ${txhash}`);
     return txhash;
@@ -54,9 +54,8 @@ export async function airdropPublicKey(options: { file?: string; publicKey?: str
 }
 
 export async function getBalance(publicKey: string) {
-  const connection = new Connection("https://api.devnet.solana.com");
   try {
-    const balance = await connection.getBalance(new PublicKey(publicKey));
+    const balance = await CONNECTION.getBalance(new PublicKey(publicKey));
     console.log(`Balance of ${publicKey}: ${balance / 1e9} SOL`);
   } catch (error) {
     console.error(`Failed to get balance of account ${publicKey}:`, error);
@@ -73,11 +72,9 @@ export async function transferSOL(options: { file: string; recipient: string; am
     }
 
     const senderKeypair = Keypair.fromSecretKey(new Uint8Array(keypairJson.secretKey));
-
-    const connection = new Connection("https://api.devnet.solana.com");
     const recipientPublicKey = new PublicKey(options.recipient);
 
-    const balance = await connection.getBalance(senderKeypair.publicKey);
+    const balance = await CONNECTION.getBalance(senderKeypair.publicKey);
     const amountLamports = parseFloat(options.amount) * 1e9;
 
     if (balance < amountLamports) {
@@ -93,7 +90,7 @@ export async function transferSOL(options: { file: string; recipient: string; am
     const transaction = new Transaction().add(transferInstruction);
 
     console.log(`Transferring ${options.amount} SOL from ${senderKeypair.publicKey.toBase58()} to ${recipientPublicKey.toBase58()}...`);
-    const signature = await sendAndConfirmTransaction(connection, transaction, [senderKeypair]);
+    const signature = await sendAndConfirmTransaction(CONNECTION, transaction, [senderKeypair]);
 
     console.log(`Transfer successful. Transaction signature: ${signature}`);
     return signature;

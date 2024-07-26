@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.transferSOL = exports.getBalance = exports.airdropPublicKey = exports.keyPairGenerator = void 0;
 const web3_js_1 = require("@solana/web3.js");
 const fs_1 = __importDefault(require("fs"));
+const CONNECTION = new web3_js_1.Connection("https://api.devnet.solana.com");
 function keyPairGenerator() {
     const keypair = new web3_js_1.Keypair();
     const secret = keypair.secretKey;
@@ -41,10 +42,9 @@ function airdropPublicKey(options) {
             else {
                 publicKey = new web3_js_1.PublicKey(options.publicKey);
             }
-            const connection = new web3_js_1.Connection("https://api.devnet.solana.com");
             const amountLamports = options.amount * 1e9;
             console.log(`Requesting airdrop of ${options.amount} SOL to ${publicKey.toBase58()}...`);
-            const txhash = yield connection.requestAirdrop(publicKey, amountLamports);
+            const txhash = yield CONNECTION.requestAirdrop(publicKey, amountLamports);
             console.log(`Airdrop successful. Transaction hash: ${txhash}`);
             return txhash;
         }
@@ -57,9 +57,8 @@ function airdropPublicKey(options) {
 exports.airdropPublicKey = airdropPublicKey;
 function getBalance(publicKey) {
     return __awaiter(this, void 0, void 0, function* () {
-        const connection = new web3_js_1.Connection("https://api.devnet.solana.com");
         try {
-            const balance = yield connection.getBalance(new web3_js_1.PublicKey(publicKey));
+            const balance = yield CONNECTION.getBalance(new web3_js_1.PublicKey(publicKey));
             console.log(`Balance of ${publicKey}: ${balance / 1e9} SOL`);
         }
         catch (error) {
@@ -77,9 +76,8 @@ function transferSOL(options) {
                 throw new Error("Invalid JSON file format. Public key or secret key not found.");
             }
             const senderKeypair = web3_js_1.Keypair.fromSecretKey(new Uint8Array(keypairJson.secretKey));
-            const connection = new web3_js_1.Connection("https://api.devnet.solana.com");
             const recipientPublicKey = new web3_js_1.PublicKey(options.recipient);
-            const balance = yield connection.getBalance(senderKeypair.publicKey);
+            const balance = yield CONNECTION.getBalance(senderKeypair.publicKey);
             const amountLamports = parseFloat(options.amount) * 1e9;
             if (balance < amountLamports) {
                 throw new Error(`Insufficient balance. Current balance: ${balance / 1e9} SOL, Attempted transfer: ${options.amount} SOL`);
@@ -91,7 +89,7 @@ function transferSOL(options) {
             });
             const transaction = new web3_js_1.Transaction().add(transferInstruction);
             console.log(`Transferring ${options.amount} SOL from ${senderKeypair.publicKey.toBase58()} to ${recipientPublicKey.toBase58()}...`);
-            const signature = yield (0, web3_js_1.sendAndConfirmTransaction)(connection, transaction, [senderKeypair]);
+            const signature = yield (0, web3_js_1.sendAndConfirmTransaction)(CONNECTION, transaction, [senderKeypair]);
             console.log(`Transfer successful. Transaction signature: ${signature}`);
             return signature;
         }
