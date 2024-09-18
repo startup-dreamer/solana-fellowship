@@ -1,4 +1,7 @@
 'use client';
+import s from "./page.module.css";
+import Image from "next/image";
+import no_wallet from "../components/images/no_wallet.png";
 
 import {
   clusterApiUrl,
@@ -77,7 +80,7 @@ export default function Page() {
       const signature = await sendTransaction(
         tx2,
         connection,
-        {signers: [mint, mint],}
+        { signers: [mint, mint], }
       );
       await connection.confirmTransaction(signature, 'processed');
 
@@ -241,89 +244,116 @@ export default function Page() {
 
   const address = publicKey;
   if (!address) {
-    return <div>No wallet connected</div>;
+    return <div className={s["no_wallet_div"]}>
+      <div>
+        <div className={s["no_wallet_div_child"]}>
+          <Image src={no_wallet} alt="No Wallet" width={100} height={100} />
+        </div>
+          No wallet connected 
+      </div>
+    </div>;
   }
 
+  // // temp code
+  // let public_Key = new PublicKey("6VHv5m21srQtBTbFikgj8KAsGm323VZvR2LsUbsea2Sf");
+  // const address = public_Key
+
   return (
-    <div>
+    <div className={s["parent_page_layout"]}>
       <AppHero
         title="SPL Tokens"
-        subtitle="Create and interact with tokens on Solana"
+        subtitle="Create and interact with tokens on Solana Create and interact with tokens on SolanaCreate and interact with tokens on Solana"
       >
         <div className="my-4">
-          <div>Account: {address.toBase58()}</div>
+          <div className={s["parent_page_account"]}>Account: {address.toBase58()}</div>
           <button
             onClick={handleCreateToken}
-            className="w-full px-3 py-2 bg-blue-500 text-white rounded-lg"
+            className={s["create_token_button_main"]}
           >
             Create New Token
           </button>
         </div>
       </AppHero>
-      <div className="space-y-8">
-        <div className="my-4">
+      <div className={s["input_holder_parent"]}>
+        <div className={s["input_holder_child"]}>
+          <h2>
+            Enter the amount and recipient address
+          </h2>
           <input
             type="text"
             value={transferAmount}
             onChange={(e) => setTransferAmount(e.target.value)}
             placeholder="Amount"
-            className="w-full px-3 py-2 border rounded-lg"
+            className={s["input_child_main_text"]}
           />
           <input
             type="text"
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
             placeholder="Recipient Address"
-            className="w-full px-3 py-2 border rounded-lg mt-2"
+            className={s["input_child_main_text_2"]}
           />
           <button
             onClick={handleTransfer}
-            className="w-full px-3 py-2 bg-green-500 text-white rounded-lg mt-2"
+            className={s["input_child_main_button"]}
+            style={{ backgroundColor: "purple" }}
           >
             Transfer
           </button>
         </div>
-        <div className="my-4">
+        <div className={s["input_holder_child"]}>
+          <h2>
+            Enter the Mint Amount
+          </h2>
           <input
             type="text"
             value={mintAmount}
             onChange={(e) => setMintAmount(e.target.value)}
             placeholder="Mint Amount"
-            className="w-full px-3 py-2 border rounded-lg"
+            className={s["input_child_main_text"]}
           />
           <button
             onClick={handleMint}
-            className="w-full px-3 py-2 bg-purple-500 text-white rounded-lg mt-2"
+            className={s["input_child_main_button"]}
+            style={{ backgroundColor: "green" }}
           >
             Mint
           </button>
         </div>
-        <div className="my-4">
+        <div className={s["input_holder_child"]}>
+          <h2>
+            Enter the Burn Amount
+          </h2>
           <input
             type="text"
             value={burnAmount}
             onChange={(e) => setBurnAmount(e.target.value)}
             placeholder="Burn Amount"
-            className="w-full px-3 py-2 border rounded-lg"
+            className={s["input_child_main_text"]}
           />
           <button
             onClick={handleBurn}
-            className="w-full px-3 py-2 bg-red-500 text-white rounded-lg mt-2"
+            className={s["input_child_main_button"]}
+            style={{ backgroundColor: "red" }}
           >
             Burn
           </button>
         </div>
-        <div className="my-4">
+        <div className={s["input_holder_child"]}>
+          <h2>
+            Enter the Delegate Address
+          </h2>
           <input
             type="text"
             value={delegateAddress}
             onChange={(e) => setDelegateAddress(e.target.value)}
             placeholder="Delegate Address"
-            className="w-full px-3 py-2 border rounded-lg"
+            className={s["input_child_main_text"]}
           />
           <button
             onClick={handleDelegate}
-            className="w-full px-3 py-2 bg-yellow-500 text-white rounded-lg mt-2"
+            className={s["input_child_main_button"]}
+            style={{ backgroundColor: "blue" }}
           >
             Delegate
           </button>

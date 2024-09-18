@@ -1,0 +1,75 @@
+/* Navbar */
+.navbar_main_parent{
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+.navbar_main{
+    background-color: transparent;
+    display: flex;
+    width: 100%;
+    padding: 10px 0.5%;
+    justify-content: space-evenly;
+    backdrop-filter: blur(10px) saturate(150%);
+}
+.navbar_button_holder{
+    display: flex;
+    gap: 15px;
+}
+
+/* Top App hero */
+.hero_main_holder{
+    width: 100%;
+    margin: 120px 0px 10px 0px;
+    padding:0 2.5%;
+}
+
+.hero_main{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 10px;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.top_text_main{
+    padding-top: 18px;
+    width: 50%;
+}
+
+.top_text_main h1{
+    font-weight: white;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+/* Cluster alert */
+.cluster_airdrop_alert{
+    width: 100%;
+    background-color: rgb(128, 103, 151);
+    font-size: 16px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.cluster_airdrop_alert span{
+    padding: 8px 14px;
+}
+
+.cluster_airdrop_alert button{
+    background-color: rgb(255, 255, 255);
+    color: rgb(128, 103, 151);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.cluster_airdrop_alert button:hover{
+    background-color: rgb(128, 103, 151);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    padding: 8px 12px;
+}

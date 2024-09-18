@@ -1,0 +1,140 @@
+/* Navbar */
+.navbar_main {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 18px;
+    background-color: rgba(32, 35, 62, 0.591);
+    position: fixed;
+    top: 0;
+}
+
+.navbar_main h1 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.navbar_main ul {
+    font-size: 18px;
+    width: 40%;
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    justify-content: space-between;
+}
+
+.navbar_main ul li {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 27px;
+    border-radius: 6px;
+}
+
+.navbar_main ul .active {
+    background-color: rgb(69, 69, 211);
+}
+
+.navbar_main ul li:hover {
+    background-color: rgb(102, 97, 148);
+}
+
+/* Grids */
+.grid_items {
+    margin-top: 75px;
+    padding: 2% 1%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 30px;
+}
+
+.grid_items_child {
+    background-color: rgba(63, 61, 77, 0.591);
+    display: flex;
+}
+
+.grid_items_details {
+    width: 44%;
+    padding: 15px 0px 15px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.grid_items_details h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.grid_items_details p {
+    font-size: 18px;
+}
+
+.grid_items_details button {
+    width: 100%;
+    padding: 10px 10px;
+    font-weight: bold;
+    background-color: rgb(72, 178, 72);
+}
+
+.grid_items_child button:hover {
+    background-color: rgb(45, 138, 45);
+}
+
+/* QR Code */
+.qr_holder_main {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, 0.705);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr_holder {
+    width: 40%;
+    height: 60%;
+    background-color: rgb(19, 19, 35);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 5px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.qr_holder_cross{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    padding-right: 10px;
+    font-weight: bold;
+    color: rgb(200, 200, 200);
+    cursor: pointer;
+}
+.qr_holder_cross:hover{
+    color: rgb(255, 255, 255);
+}
+
+.qr_box{
+    display: flex;
+    justify-content: center;
+}
+.verify_button{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.verify_button button{
+    width: 80%;
+    padding: 10px 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    background-color: rgb(79, 72, 178);
+}

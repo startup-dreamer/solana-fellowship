@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Assignment 2: Web UI for Token Operations
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project implements a web-based user interface for managing Solana tokens. It provides functionality for creating tokens, minting, transferring, burning, and delegating token accounts.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Token Creation: Create a new SPL token with custom parameters.
+2. Minting: Mint new tokens to a specified account.
+3. Transfer: Send tokens from one account to another.
+4. Burning: Reduce the token supply by burning tokens.
+5. Delegation: Delegate the authority of an Associated Token Account (ATA) to another public key.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Next.js: React framework for building the web application
+- Solana Web3.js: For interacting with the Solana blockchain
+- @solana/spl-token: Library for SPL token operations
+- @solana/wallet-adapter: For wallet connection and management
+- TailwindCSS & DaisyUI: For styling the user interface
+- React Query: For efficient data fetching and state management
 
-## Learn More
+## Setup and Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd assignment-2
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Run the development server:
+   ```
+   npm run dev
+   ```
 
-## Deploy on Vercel
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Connect your Solana wallet using the "Connect Wallet" button.
+2. Use the provided forms to perform various token operations:
+   - Create a new token
+   - Mint tokens to an account
+   - Transfer tokens between accounts
+   - Burn tokens to reduce supply
+   - Delegate token account authority
+
+## Important Notes
+
+- This application interacts with the Solana blockchain. Ensure you're connected to the correct network (e.g., devnet for testing).
+- Handle private keys and sensitive information with care. Never share your private keys or seed phrases.
+- This is a demonstration project and may not be suitable for production use without further security enhancements.
+
+## Contributing
+
+This project is part of the Solana Fellowship program. Contributions are welcome for educational purposes. Please submit issues or pull requests if you have suggestions for improvements.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).

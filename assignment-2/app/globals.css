@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  height: 100%;
+*{
+  color: white;
+}
+body{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .wallet-adapter-button-trigger {
-  background: rgb(100, 26, 230) !important;
+  background: rgb(230, 26, 26) !important;
   border-radius: 8px !important;
   padding-left: 16px !important;
   padding-right: 16px !important;

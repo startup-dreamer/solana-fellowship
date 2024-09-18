@@ -21,7 +21,7 @@ import { useCluster } from './cluster';
 import { ExplorerLink } from './cluster';
 import { WalletButton } from './provider';
 import { redirect } from 'next/navigation';
-
+import s from "./ui.module.css";
 import { useParams } from 'next/navigation';
 
 
@@ -241,19 +241,18 @@ export function AccountBalance({ address }: { address: PublicKey }) {
     }
     if (query.isError || !query.data) {
       return (
-        <div className="alert alert-warning text-warning-content/80 rounded-none flex justify-center">
-          <span>
-            You are connected to <strong>{cluster.name}</strong> but your account
-            is not found on this cluster.
-          </span>
-          <button
-            className="btn btn-xs btn-neutral"
-            onClick={() =>
-              mutation.mutateAsync(1).catch((err) => console.log(err))
-            }
-          >
-            Request Airdrop
-          </button>
+        <div className={s['cluster_airdrop_alert']}>
+            <span>
+              You are connected to <strong>{cluster.name}</strong> but your account
+              is not found on this cluster.
+            </span>
+            <button
+              onClick={() =>
+                mutation.mutateAsync(1).catch((err) => console.log(err))
+              }
+            >
+              Request Airdrop
+            </button>
         </div>
       );
     }
