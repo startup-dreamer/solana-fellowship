@@ -28,13 +28,13 @@ This repository contains the solutions for various exercises completed as part o
 - **Description**: A web-based Point-of-Sale system for adding products and checking out using Solana Pay, with payment confirmation display.
 - **Solution**: Located in [`assignment-6`](./assignment-6)
 
-### 7. Camera-based NFT Minting App (In Progress)
+### 7. Camera-based NFT Minting App
 - **Description**: An application that captures an image through the camera, mints an NFT with that image, and adds the current location (longitude, latitude) in the metadata.
-- **Status**: Yet to complete
+- **Status**: [`assignment-7`](./assignment-7)
 
-### 8. cNFT Collection Creation and Airdrop (In Progress)
+### 8. cNFT Collection Creation and Airdrop
 - **Description**: Create a compressed NFT (cNFT) collection of your own profile picture and social links as metadata, and airdrop it to other fellows.
-- **Status**: Yet to complete
+- **Status**: [`assignment-8`](./assignment-8)
 
 ## Getting Started
 
