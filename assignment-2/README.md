@@ -4,6 +4,8 @@
 
 This project implements a web-based user interface for managing Solana tokens. It provides functionality for creating tokens, minting, transferring, burning, and delegating token accounts.
 
+**Deployed at:** https://solana-fellowship-psi.vercel.app/
+
 ## Features
 
 1. Token Creation: Create a new SPL token with custom parameters.

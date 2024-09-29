@@ -4,6 +4,8 @@
 
 This assignment implements a Point-of-Sale (POS) Web UI using Next.js and Solana Pay. The application allows users to add products to a cart and complete the checkout process using Solana Pay. After successful payment, a confirmation is displayed to the user.
 
+**Deployed at:** https://solana-fellowship-pyur.vercel.app/
+
 ## Tech Stack
 
 - Next.js: React framework for building the web application
